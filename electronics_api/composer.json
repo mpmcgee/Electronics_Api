@@ -1,0 +1,11 @@
+{
+    "require": {
+        "slim/slim": "^3.5",
+        "illuminate/database": "~5.8"
+    },
+    "autoload": {
+        "psr-4": {
+            "Electronics\\": "src/Electronics/"
+        }
+    }
+}
