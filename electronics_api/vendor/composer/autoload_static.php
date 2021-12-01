@@ -109,7 +109,7 @@ class ComposerStaticInit731b5c6fe62897d2fad44e9ea4cdc4dc
         ),
         'Electronics\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/src/Electronics',
+            0 => __DIR__ . '/../..' . '/api',
         ),
         'Doctrine\\Inflector\\' => 
         array (
