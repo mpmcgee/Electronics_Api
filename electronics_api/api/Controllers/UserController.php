@@ -8,11 +8,12 @@
 
 namespace Electronics\Controllers;
 
+use Electronics\Models\Token;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use Electronics\Models\User;
 use Electronics\Validations\Validator;
-use Electronics\Models\Token;
+
 
 class UserController
 {
@@ -123,7 +124,7 @@ class UserController
         $user = User::authenticateUser($username, $password);
         if ($user) {
             $status_code = 200;
-            $token = Token::generateBearer($user->id);
+            $token = Token::generateBearer($user->user_id);
             $results = [
                 'status' => 'login successful',
                 'token' => $token
@@ -148,7 +149,7 @@ class UserController
 
         if ($user) {
             $status_code = 200;
-            $jwt = User::generateJWT($user->id);
+            $jwt = User::generateJWT($user->user_id);
             $results = [
                 'status' => 'login successful',
                 'jwt' => $jwt,

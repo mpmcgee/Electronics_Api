@@ -11,10 +11,9 @@ namespace Electronics\Models;
 use \Illuminate\Database\Eloquent\Model;
 use Firebase\JWT\JWT;
 
-class User extends \Illuminate\Database\Eloquent\Model
-{
+class User extends Model {
     const JWT_KEY = 'my signature';
-    const JWT_EXPIRE = 3600;
+    const JWT_EXPIRE = 600;
     // The table associated with this model
     protected $table = 'users';
     protected $primaryKey = 'user_id';
@@ -100,7 +99,6 @@ class User extends \Illuminate\Database\Eloquent\Model
         $user->email = $params['email'];
         $user->username = $params['username'];
         $user->password = password_hash($params['password'], PASSWORD_DEFAULT);
-        $user->profile_icon = $params['profile_icon'];
 
         // Update the professor
         $user->save();

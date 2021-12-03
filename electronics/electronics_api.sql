@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.5
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3307
--- Generation Time: Oct 31, 2021 at 07:29 PM
--- Server version: 5.7.24
--- PHP Version: 7.4.1
+-- Host: localhost:8889
+-- Generation Time: Dec 02, 2021 at 10:56 PM
+-- Server version: 5.7.34
+-- PHP Version: 7.4.21
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -86,6 +85,31 @@ INSERT INTO `provider` (`provider_id`, `name`, `street`, `city`, `state`, `phone
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tokens`
+--
+
+CREATE TABLE `tokens` (
+  `id` int(11) NOT NULL,
+  `user` int(11) DEFAULT NULL,
+  `value` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tokens`
+--
+
+INSERT INTO `tokens` (`id`, `user`, `value`, `created_at`, `updated_at`) VALUES
+(1, 1, '0763edaa9d9bd2a9516280e9044d765h48bnf9jh', '2021-12-02 22:54:04', '2021-12-02 22:54:04'),
+(2, 2, '0763edaa9d9bd2a9516280e9044d765h48bnjvb48k', '2021-12-02 22:54:04', '2021-12-02 22:54:04'),
+(3, 3, '0763edaa9d9bd2a9516280e9044d765h48bnfh4n', '2021-12-02 22:54:04', '2021-12-02 22:54:04'),
+(4, 4, '0763edaa9d9bd2a9516280e9044d765h48bnbhvfi9n', '2021-12-02 22:54:04', '2021-12-02 22:54:04'),
+(5, 5, '0763edaa9d9bd2a9516280e9044d765h48bnfbhjf9n', '2021-12-02 22:54:04', '2021-12-02 22:54:04');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tv`
 --
 
@@ -124,24 +148,25 @@ CREATE TABLE `users` (
   `role` varchar(255) DEFAULT NULL,
   `last_name` varchar(255) NOT NULL,
   `first_name` varchar(255) DEFAULT NULL,
+  `username` varchar(255) NOT NULL,
   `password` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
-  `phone_number` varchar(255) DEFAULT NULL
+  `phone_number` varchar(255) DEFAULT NULL,
+  `apikey` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`user_id`, `role`, `last_name`, `first_name`, `password`, `email`, `phone_number`) VALUES
-(1, 'admin', 'Smith', 'Josh', 'JSmith', 'jsmith@gmail.com', '317-786-9098'),
-(2, 'user', 'Martinez', 'Barbara', 'BMartinez', 'bmartinez@yahoo.com', '340-453-8923'),
-(3, 'admin', 'Williams', 'Daniel', 'DWilliams', 'dwilliams@gmail.com', '301-345-7845'),
-(4, 'user', 'Brown', 'Suzan', 'SBrown', 'sbrown@hotmail.com', '324-451-0763'),
-(5, 'user', 'Miller', 'Amber', 'AMiller', 'amiller@gmail.com', '673-679-7397'),
-(6, 'user', 'Clark', 'Nancy', 'NClark', 'nclark@hotmail.com', '469-738-6730'),
-(7, 'user', 'Morgan', 'Samira', 'SMorgan', 'smorgan@gmail.com', '321-780-3579'),
-(9, 'user', 'Doe', 'Jane', 'asdasd', 'asd@asd.com', '317-456-7897');
+INSERT INTO `users` (`user_id`, `role`, `last_name`, `first_name`, `username`, `password`, `email`, `phone_number`, `apikey`) VALUES
+(1, 'admin', 'Smith', 'Josh', 'josh', 'JSmith', 'jsmith@gmail.com', '317-786-9098', 'd0763edaa9d9bd2a9516280e9044d885'),
+(2, 'user', 'Martinez', 'Barbara', 'barbara', 'BMartinez', 'bmartinez@yahoo.com', '340-453-8923', 'd0763edaa9d9bd2a9516280e9044d885'),
+(3, 'admin', 'Williams', 'Daniel', 'daniel', 'DWilliams', 'dwilliams@gmail.com', '301-345-7845', 'd0763edaa9d9bd2a9516280e9044d885'),
+(4, 'user', 'Brown', 'Suzan', 'suzan', 'SBrown', 'sbrown@hotmail.com', '324-451-0763', 'd0763edaa9d9bd2a9516280e9044d885'),
+(5, 'user', 'Miller', 'Amber', 'amber', 'AMiller', 'amiller@gmail.com', '673-679-7397', 'd0763edaa9d9bd2a9516280e9044d885'),
+(6, 'user', 'Clark', 'Nancy', 'nancy', 'NClark', 'nclark@hotmail.com', '469-738-6730', 'd0763edaa9d9bd2a9516280e9044d885'),
+(7, 'user', 'Morgan', 'Samira', 'samira', 'SMorgan', 'smorgan@gmail.com', '321-780-3579', 'd0763edaa9d9bd2a9516280e9044d885');
 
 --
 -- Indexes for dumped tables
@@ -159,6 +184,13 @@ ALTER TABLE `phone`
 --
 ALTER TABLE `provider`
   ADD PRIMARY KEY (`provider_id`);
+
+--
+-- Indexes for table `tokens`
+--
+ALTER TABLE `tokens`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user` (`user`);
 
 --
 -- Indexes for table `tv`
@@ -190,6 +222,12 @@ ALTER TABLE `provider`
   MODIFY `provider_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
+-- AUTO_INCREMENT for table `tokens`
+--
+ALTER TABLE `tokens`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
 -- AUTO_INCREMENT for table `tv`
 --
 ALTER TABLE `tv`
@@ -199,7 +237,7 @@ ALTER TABLE `tv`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Constraints for dumped tables
@@ -210,6 +248,12 @@ ALTER TABLE `users`
 --
 ALTER TABLE `phone`
   ADD CONSTRAINT `phone_ibfk_1` FOREIGN KEY (`provider_id`) REFERENCES `provider` (`provider_id`);
+
+--
+-- Constraints for table `tokens`
+--
+ALTER TABLE `tokens`
+  ADD CONSTRAINT `tokens_ibfk_1` FOREIGN KEY (`user`) REFERENCES `users` (`user_id`);
 
 --
 -- Constraints for table `tv`

@@ -39,7 +39,6 @@ class Validator
             'username' => v::noWhitespace()->notEmpty()->alnum(),
             'password' => v::notEmpty(),
             'email' => v::email(),
-            'profile_icon' => v::notEmpty(),
             'apikey' => v::notEmpty(),
         ];
 

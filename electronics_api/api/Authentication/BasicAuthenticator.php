@@ -36,7 +36,7 @@ class BasicAuthenticator {
         // Authenticate the user
         if (!User::authenticateUser($user, $password)) {
             $results = array('status' => 'Authentication failed');
-            return $response->withHeader('WWW-Authenticate', 'Basic realm="MyChatter API"')
+            return $response->withHeader('WWW-Authenticate', 'Basic realm="MyElectronics API"')
                 ->withJson($results, 401, JSON_PRETTY_PRINT);
         }
         // Proceed since the user has been authenticated.
