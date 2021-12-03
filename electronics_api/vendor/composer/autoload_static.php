@@ -22,6 +22,10 @@ class ComposerStaticInit731b5c6fe62897d2fad44e9ea4cdc4dc
             'Symfony\\Component\\Translation\\' => 30,
             'Slim\\' => 5,
         ),
+        'R' => 
+        array (
+            'Respect\\Validation\\' => 19,
+        ),
         'P' => 
         array (
             'Psr\\SimpleCache\\' => 16,
@@ -37,6 +41,7 @@ class ComposerStaticInit731b5c6fe62897d2fad44e9ea4cdc4dc
         ),
         'F' => 
         array (
+            'Firebase\\JWT\\' => 13,
             'FastRoute\\' => 10,
         ),
         'E' => 
@@ -75,6 +80,10 @@ class ComposerStaticInit731b5c6fe62897d2fad44e9ea4cdc4dc
         array (
             0 => __DIR__ . '/..' . '/slim/slim/Slim',
         ),
+        'Respect\\Validation\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/respect/validation/library',
+        ),
         'Psr\\SimpleCache\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/simple-cache/src',
@@ -102,6 +111,10 @@ class ComposerStaticInit731b5c6fe62897d2fad44e9ea4cdc4dc
         'Illuminate\\Container\\' => 
         array (
             0 => __DIR__ . '/..' . '/illuminate/container',
+        ),
+        'Firebase\\JWT\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/firebase/php-jwt/src',
         ),
         'FastRoute\\' => 
         array (

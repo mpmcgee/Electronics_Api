@@ -15,7 +15,7 @@ return [
 
     'addContentLengthHeader' => false,
 
-/*
+    /*
      * This array contains database connection settings.
      */
     'db' => [

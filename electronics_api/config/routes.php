@@ -9,6 +9,7 @@
 use Electronics\Middleware\Logging as ElectronicsLogging;
 use Electronics\Authentication\MyAuthenticator;
 use Electronics\Authentication\BasicAuthenticator;
+use Elecrtronics\Authentication\BearerAuthenticator;
 use Electronics\Models\User;
 use Electronics\Models\TV;
 use Electronics\Models\Provider;
@@ -78,30 +79,22 @@ $app->group('', function () {
         $this->get('/{id}/provider', 'TVController:viewProviders');
         $this->get('/{id}/user', 'TVController:viewUser');
 
-//        $this->post('', 'MessageController:create');
-//        $this->put('/{id}', 'MessageController:update');//Postman PUT Boyd with x-www-form-urlencoded to send new information.
-//        $this->patch('/{id}', 'MessageController:update');//Postman PATCH Boyd with x-www-form-urlencoded to send new information.
-//        $this->delete('/{id}', 'MessageController:delete');
+        $this->post('', 'TVController:create');
+        $this->put('/{id}', 'TVController:update');//Postman PUT Boyd with x-www-form-urlencoded to send new information.
+        $this->patch('/{id}', 'TVController:update');//Postman PATCH Boyd with x-www-form-urlencoded to send new information.
+        $this->delete('/{id}', 'TVController:delete');
     });
 
 
 //})->add(new MyAuthenticator());
 //})->add(new BasicAuthenticator());
 //})->add(new BearerAuthenticator());
-})->add(new JWTAuthenticator());
+//})->add(new JWTAuthenticator());
+});
 
 
-//$app->add(new MyAuthenticator());
+
 //$app->add(new BasicAuthenticator());
-//$app->add(new BearerAuthenticator());
-
-//})->add(new MyAuthenticator());
-//})->add(new BasicAuthenticator());
-//})->add(new BearerAuthenticator());
-//})->add(new JWTAuthenticator()); // this was used.
-//})->add(new OAuth2Authenticator());  // Needs to test it in a browser, but not in Postman
-
-$app->add(new BasicAuthenticator());
 //$app->add(new MyAuthenticator());
 $app->add(new ElectronicsLogging());
 $app->run();

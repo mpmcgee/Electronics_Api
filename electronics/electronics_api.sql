@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 4.9.5
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:8889
--- Generation Time: Dec 02, 2021 at 10:56 PM
--- Server version: 5.7.34
--- PHP Version: 7.4.21
+-- Host: localhost:3307
+-- Generation Time: Dec 03, 2021 at 09:40 PM
+-- Server version: 5.7.24
+-- PHP Version: 7.4.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -24,10 +25,10 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `phone`
+-- Table structure for table `phones`
 --
 
-CREATE TABLE `phone` (
+CREATE TABLE `phones` (
   `phone_id` int(11) NOT NULL,
   `provider_id` int(11) DEFAULT NULL,
   `name` varchar(255) NOT NULL,
@@ -36,10 +37,10 @@ CREATE TABLE `phone` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `phone`
+-- Dumping data for table `phones`
 --
 
-INSERT INTO `phone` (`phone_id`, `provider_id`, `name`, `brand`, `price`) VALUES
+INSERT INTO `phones` (`phone_id`, `provider_id`, `name`, `brand`, `price`) VALUES
 (1, 1, 'iPhone 13 pro max', 'iPhone', '$1300.48'),
 (2, 3, 'Galaxy s20', 'Samsung ', '$879.30'),
 (3, 5, 'iPhone 12', 'iPhone', '$1000.00'),
@@ -54,10 +55,10 @@ INSERT INTO `phone` (`phone_id`, `provider_id`, `name`, `brand`, `price`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `provider`
+-- Table structure for table `providers`
 --
 
-CREATE TABLE `provider` (
+CREATE TABLE `providers` (
   `provider_id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `street` varchar(255) DEFAULT NULL,
@@ -67,10 +68,10 @@ CREATE TABLE `provider` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `provider`
+-- Dumping data for table `providers`
 --
 
-INSERT INTO `provider` (`provider_id`, `name`, `street`, `city`, `state`, `phone_number`) VALUES
+INSERT INTO `providers` (`provider_id`, `name`, `street`, `city`, `state`, `phone_number`) VALUES
 (1, 'Apple', '5768 Keystone ave', 'Indianapolis ', 'IN', '317-989-4579'),
 (2, 'Boost Mobile', '7830 madison ave', 'Indianapolis', 'IN', '317-378-3789'),
 (3, 'T-Mobile', '6298 Grand Valley blvd', 'Martinsville', 'IN', '317-478-2789'),
@@ -110,10 +111,10 @@ INSERT INTO `tokens` (`id`, `user`, `value`, `created_at`, `updated_at`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tv`
+-- Table structure for table `tvs`
 --
 
-CREATE TABLE `tv` (
+CREATE TABLE `tvs` (
   `tv_id` int(11) NOT NULL,
   `provider_id` int(11) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
@@ -122,10 +123,10 @@ CREATE TABLE `tv` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `tv`
+-- Dumping data for table `tvs`
 --
 
-INSERT INTO `tv` (`tv_id`, `provider_id`, `name`, `brand`, `price`) VALUES
+INSERT INTO `tvs` (`tv_id`, `provider_id`, `name`, `brand`, `price`) VALUES
 (1, 8, 'Class 7 series led 4K', 'Samsung', '$699.45'),
 (2, 10, 'C1 series OLED 4K', 'LG', '$827.45'),
 (3, 7, 'n10 series led hd', 'TLC', '$455.36'),
@@ -166,23 +167,24 @@ INSERT INTO `users` (`user_id`, `role`, `last_name`, `first_name`, `username`, `
 (4, 'user', 'Brown', 'Suzan', 'suzan', 'SBrown', 'sbrown@hotmail.com', '324-451-0763', 'd0763edaa9d9bd2a9516280e9044d885'),
 (5, 'user', 'Miller', 'Amber', 'amber', 'AMiller', 'amiller@gmail.com', '673-679-7397', 'd0763edaa9d9bd2a9516280e9044d885'),
 (6, 'user', 'Clark', 'Nancy', 'nancy', 'NClark', 'nclark@hotmail.com', '469-738-6730', 'd0763edaa9d9bd2a9516280e9044d885'),
-(7, 'user', 'Morgan', 'Samira', 'samira', 'SMorgan', 'smorgan@gmail.com', '321-780-3579', 'd0763edaa9d9bd2a9516280e9044d885');
+(7, 'user', 'Morgan', 'Samira', 'samira', 'SMorgan', 'smorgan@gmail.com', '321-780-3579', 'd0763edaa9d9bd2a9516280e9044d885'),
+(8, 'admin', 'admin', 'admin', 'admin', '$2y$10$gnAsgrdTLK/HuWfqLSrR9.QXbn01BTIfAbsRb3TBadmHNfNM5w3BO', 'admin@admin.com', '555-555-5555', 'd0763edaa9d9bd2a9516280e9044d885');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `phone`
+-- Indexes for table `phones`
 --
-ALTER TABLE `phone`
+ALTER TABLE `phones`
   ADD PRIMARY KEY (`phone_id`),
   ADD KEY `provider_id` (`provider_id`);
 
 --
--- Indexes for table `provider`
+-- Indexes for table `providers`
 --
-ALTER TABLE `provider`
+ALTER TABLE `providers`
   ADD PRIMARY KEY (`provider_id`);
 
 --
@@ -193,9 +195,9 @@ ALTER TABLE `tokens`
   ADD KEY `user` (`user`);
 
 --
--- Indexes for table `tv`
+-- Indexes for table `tvs`
 --
-ALTER TABLE `tv`
+ALTER TABLE `tvs`
   ADD PRIMARY KEY (`tv_id`),
   ADD KEY `provider_id` (`provider_id`);
 
@@ -210,15 +212,15 @@ ALTER TABLE `users`
 --
 
 --
--- AUTO_INCREMENT for table `phone`
+-- AUTO_INCREMENT for table `phones`
 --
-ALTER TABLE `phone`
+ALTER TABLE `phones`
   MODIFY `phone_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT for table `provider`
+-- AUTO_INCREMENT for table `providers`
 --
-ALTER TABLE `provider`
+ALTER TABLE `providers`
   MODIFY `provider_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
@@ -228,26 +230,26 @@ ALTER TABLE `tokens`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT for table `tv`
+-- AUTO_INCREMENT for table `tvs`
 --
-ALTER TABLE `tv`
+ALTER TABLE `tvs`
   MODIFY `tv_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Constraints for dumped tables
 --
 
 --
--- Constraints for table `phone`
+-- Constraints for table `phones`
 --
-ALTER TABLE `phone`
-  ADD CONSTRAINT `phone_ibfk_1` FOREIGN KEY (`provider_id`) REFERENCES `provider` (`provider_id`);
+ALTER TABLE `phones`
+  ADD CONSTRAINT `phones_ibfk_1` FOREIGN KEY (`provider_id`) REFERENCES `providers` (`provider_id`);
 
 --
 -- Constraints for table `tokens`
@@ -256,10 +258,10 @@ ALTER TABLE `tokens`
   ADD CONSTRAINT `tokens_ibfk_1` FOREIGN KEY (`user`) REFERENCES `users` (`user_id`);
 
 --
--- Constraints for table `tv`
+-- Constraints for table `tvs`
 --
-ALTER TABLE `tv`
-  ADD CONSTRAINT `tv_ibfk_1` FOREIGN KEY (`provider_id`) REFERENCES `provider` (`provider_id`);
+ALTER TABLE `tvs`
+  ADD CONSTRAINT `tvs_ibfk_1` FOREIGN KEY (`provider_id`) REFERENCES `providers` (`provider_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
