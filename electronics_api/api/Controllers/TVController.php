@@ -22,7 +22,7 @@ class TVController {
 
     //get single tv by id
     public function view(Request $request, Response $response, array $args){
-        $id = $args['tv_id'];
+        $id = $args['id'];
         $results = TV::getTvById($id);
         $code = array_key_exists('status', $results) ? 500 : 200;
         return $response->withJson($results, $code, JSON_PRETTY_PRINT);
@@ -31,19 +31,7 @@ class TVController {
     // Create a tv when the user signs up an account
     public function create(Request $request, Response $response, array $args)
     {
-        // Validate the request
-        $validation = Validator::validateTV($request);
 
-        // If validation failed
-        if (!$validation) {
-            $results = [
-                'status' => "Validation failed",
-                'errors' => Validator::getErrors()
-            ];
-            return $response->withJson($results, 500, JSON_PRETTY_PRINT);
-        }
-
-        // Validation has passed; Proceed to create the tv
         $tv = TV::createTV($request);
         $results = [
             'status' => 'tv created',
@@ -56,33 +44,27 @@ class TVController {
     // Update a tv
     public function update(Request $request, Response $response, array $args)
     {
-        // Validate the request
-        $validation = Validator::validateTV($request);
-
-        // If validation failed
-        if (!$validation) {
+        // Inserting a new provider
+        $tv = TV::updateTV($request);
+        if ($tv->tv_id) {
             $results = [
-                'status' => "Validation failed",
-                'errors' => Validator::getErrors()
+                'status' => 'TV updated',
+                'provider_uri' => '/tvs/' . $tv->id,
+                'data' => $tv
             ];
-            return $response->withJson($results, 500, JSON_PRETTY_PRINT);
+            $code = 200;
+        } else {
+            $code = 500;
         }
 
-        // Validation has passed; Proceed to update the tv
-        $tv = TV::updateTV($request);
-        $results = [
-            'status' => 'tv updated',
-            'data' => $tv
-        ];
-        $code = array_key_exists('status', $results) ? 200 : 500;
         return $response->withJson($results, $code, JSON_PRETTY_PRINT);
     }
 
     // Delete a tv
     public function delete(Request $request, Response $response, array $args)
     {
-        $tv_id = $args['tv_id'];
-        TV::deleteTV($tv_id);
+        $id = $args['id'];
+        TV::deleteTV($id);
         $results = [
             'status' => 'TV deleted',
         ];

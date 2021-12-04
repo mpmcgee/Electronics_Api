@@ -38,7 +38,7 @@ class TV extends Model {
         $params = $request->getParsedBody();
 
         // Create a new TV instance
-        $tv = new \Electronics\Models\TV();
+        $tv = new TV();
 
         // Set the tv attributes
         foreach ($params as $field => $value) {
@@ -63,16 +63,12 @@ class TV extends Model {
         $params = $request->getParsedBody();
 
         //Retrieve the tv's id from url and then the tv from the database
-        $tv_id = $request->getAttribute('tv_id');
-        $tv = self::findOrFail($tv_id);
+        $id = $request->getAttribute('id');
+        $tv = self::findOrFail($id);
 
-        // Update attributes of the professor
-        $tv->provider_id = $params['provider_id'];
-        $tv->name = $params['name'];
-        $tv->brand = $params['brand'];
-        $tv->price = $params['price'];
-
-        // Update the database
+        foreach ($params as $field => $value) {
+            $tv->$field = $value;
+        }
         $tv->save();
         return $tv;
     }

@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '33c736137be51ac1639f69b91c0b0b9172acc9c7',
+        'reference' => '5a6b5ba63271160c943fc6f1cca598e5e8c12ed7',
         'name' => '__root__',
         'dev' => true,
     ),
@@ -16,7 +16,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '33c736137be51ac1639f69b91c0b0b9172acc9c7',
+            'reference' => '5a6b5ba63271160c943fc6f1cca598e5e8c12ed7',
             'dev_requirement' => false,
         ),
         'doctrine/inflector' => array(
@@ -74,12 +74,12 @@
             'dev_requirement' => false,
         ),
         'nesbot/carbon' => array(
-            'pretty_version' => '2.54.0',
-            'version' => '2.54.0.0',
+            'pretty_version' => '2.55.2',
+            'version' => '2.55.2.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../nesbot/carbon',
             'aliases' => array(),
-            'reference' => 'eed83939f1aed3eee517d03a33f5ec587ac529b5',
+            'reference' => '8c2a18ce3e67c34efc1b29f64fe61304368259a2',
             'dev_requirement' => false,
         ),
         'nikic/fast-route' => array(

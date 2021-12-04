@@ -67,7 +67,7 @@ class User extends Model {
         $params = $request->getParsedBody();
 
         // Create a new User instance
-        $user = new \Electronics\Models\User();
+        $user = new User();
 
         // Set the user's attributes
         foreach ($params as $field => $value) {

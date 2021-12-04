@@ -34,24 +34,6 @@ class UserController
         return $response->withJson($results, $code, JSON_PRETTY_PRINT);
     }
 
-//    //get all messages posted by a user
-//    public function viewMessages(Request $request, Response $response, array $args)
-//    {
-//        $id = $args['id'];
-//        $results = User::getMessagesByUser($id);
-//        $code = array_key_exists('status', $results) ? 500 : 200;
-//        return $response->withJson($results, $code, JSON_PRETTY_PRINT);
-//    }
-//
-//    //get all comments posted by a user
-//    public function viewComments(Request $request, Response $response, array $args)
-//    {
-//        $id = $args['id'];
-//        $results = User::getCommentByUser($id);
-//        $code = array_key_exists('status', $results) ? 500 : 200;
-//        return $response->withJson($results, $code, JSON_PRETTY_PRINT);
-//    }
-
     // Create a user when the user signs up an account
     public function create(Request $request, Response $response, array $args)
     {

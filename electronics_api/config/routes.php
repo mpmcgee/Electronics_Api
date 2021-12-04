@@ -52,10 +52,10 @@ $app->group('', function () {
         $this->get('/{id}/provider', 'PhoneController:viewProviders');
         $this->get('/{id}/user', 'PhoneController:viewUser');
 
-//        $this->post('', 'MessageController:create');
-//        $this->put('/{id}', 'MessageController:update');//Postman PUT Boyd with x-www-form-urlencoded to send new information.
-//        $this->patch('/{id}', 'MessageController:update');//Postman PATCH Boyd with x-www-form-urlencoded to send new information.
-//        $this->delete('/{id}', 'MessageController:delete');
+        $this->post('', 'PhoneController:create');
+        $this->put('/{id}', 'PhoneController:update');//Postman PUT Boyd with x-www-form-urlencoded to send new information.
+        $this->patch('/{id}', 'PhoneController:update');//Postman PATCH Boyd with x-www-form-urlencoded to send new information.
+        $this->delete('/{id}', 'PhoneController:delete');
     });
 
     // The Provider group
@@ -64,11 +64,10 @@ $app->group('', function () {
         $this->get('/{id}', 'ProviderController:view');
         $this->get('/{id}/user', 'ProviderController:viewUser');
 
-        //TODO: Post needs CUD
-//        $this->post('', 'CommentController:create');
-//        $this->put('/{id}', 'CommentController:update');
-//        $this->patch('/{id}', 'CommentController:update');
-//        $this->delete('/{id}', 'CommentController:delete');
+        $this->post('', 'ProviderController:create');
+        $this->put('/{id}', 'ProviderController:update');
+        $this->patch('/{id}', 'ProviderController:update');
+        $this->delete('/{id}', 'ProviderController:delete');
     });
 
     $this->group('/tvs', function () {
