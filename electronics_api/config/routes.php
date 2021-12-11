@@ -9,7 +9,7 @@
 use Electronics\Middleware\Logging as ElectronicsLogging;
 use Electronics\Authentication\MyAuthenticator;
 use Electronics\Authentication\BasicAuthenticator;
-use Elecrtronics\Authentication\BearerAuthenticator;
+use Electronics\Authentication\BearerAuthenticator;
 use Electronics\Models\User;
 use Electronics\Models\TV;
 use Electronics\Models\Provider;
@@ -88,8 +88,8 @@ $app->group('', function () {
 //})->add(new MyAuthenticator());
 //})->add(new BasicAuthenticator());
 //})->add(new BearerAuthenticator());
-//})->add(new JWTAuthenticator());
-});
+})->add(new JWTAuthenticator());
+//});
 
 
 
