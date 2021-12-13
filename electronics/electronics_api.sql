@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3307
--- Generation Time: Dec 03, 2021 at 09:40 PM
+-- Generation Time: Dec 13, 2021 at 03:24 PM
 -- Server version: 5.7.24
 -- PHP Version: 7.4.1
 
@@ -42,7 +42,6 @@ CREATE TABLE `phones` (
 
 INSERT INTO `phones` (`phone_id`, `provider_id`, `name`, `brand`, `price`) VALUES
 (1, 1, 'iPhone 13 pro max', 'iPhone', '$1300.48'),
-(2, 3, 'Galaxy s20', 'Samsung ', '$879.30'),
 (3, 5, 'iPhone 12', 'iPhone', '$1000.00'),
 (4, 1, 'Pixel 4', 'Android ', '$600.99'),
 (5, 1, 'iPhone 13', 'iPhone', '$1300.48'),
@@ -128,7 +127,6 @@ CREATE TABLE `tvs` (
 
 INSERT INTO `tvs` (`tv_id`, `provider_id`, `name`, `brand`, `price`) VALUES
 (1, 8, 'Class 7 series led 4K', 'Samsung', '$699.45'),
-(2, 10, 'C1 series OLED 4K', 'LG', '$827.45'),
 (3, 7, 'n10 series led hd', 'TLC', '$455.36'),
 (4, 9, 'class x85j 4k', 'Sony', '$389.36'),
 (5, 6, 'class 5 series q60a', 'Samsung', '$999.00'),
@@ -153,7 +151,7 @@ CREATE TABLE `users` (
   `password` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
   `phone_number` varchar(255) DEFAULT NULL,
-  `apikey` varchar(255) NOT NULL
+  `apikey` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -168,7 +166,8 @@ INSERT INTO `users` (`user_id`, `role`, `last_name`, `first_name`, `username`, `
 (5, 'user', 'Miller', 'Amber', 'amber', 'AMiller', 'amiller@gmail.com', '673-679-7397', 'd0763edaa9d9bd2a9516280e9044d885'),
 (6, 'user', 'Clark', 'Nancy', 'nancy', 'NClark', 'nclark@hotmail.com', '469-738-6730', 'd0763edaa9d9bd2a9516280e9044d885'),
 (7, 'user', 'Morgan', 'Samira', 'samira', 'SMorgan', 'smorgan@gmail.com', '321-780-3579', 'd0763edaa9d9bd2a9516280e9044d885'),
-(8, 'admin', 'admin', 'admin', 'admin', '$2y$10$gnAsgrdTLK/HuWfqLSrR9.QXbn01BTIfAbsRb3TBadmHNfNM5w3BO', 'admin@admin.com', '555-555-5555', 'd0763edaa9d9bd2a9516280e9044d885');
+(8, 'admin', 'admin', 'admin', 'admin', '$2y$10$gnAsgrdTLK/HuWfqLSrR9.QXbn01BTIfAbsRb3TBadmHNfNM5w3BO', 'admin@admin.com', '555-555-5555', 'd0763edaa9d9bd2a9516280e9044d885'),
+(9, NULL, 'Person', 'Test', 'testperson', '$2y$10$JelGdsIdmPKPVeEfY1gz8OuruOLl/6V1tU.ahK98Mkpu5bnWbI/rm', 'admin@admin.com', NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -227,7 +226,7 @@ ALTER TABLE `providers`
 -- AUTO_INCREMENT for table `tokens`
 --
 ALTER TABLE `tokens`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tvs`
@@ -239,7 +238,7 @@ ALTER TABLE `tvs`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Constraints for dumped tables
