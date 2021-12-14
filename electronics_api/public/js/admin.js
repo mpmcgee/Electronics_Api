@@ -28,43 +28,46 @@ function displayAllTVs(tvs, subheading=null) {
             <input id='search-term' placeholder='Enter search terms'> 
             <button id='btn-post-search' onclick='searchTVs()'>Search</button></div>
             <div class='content-row content-row-header'>
-            <div class='post-id'>TV ID</div>
-            <div class='post-body'>Name</div>
-            <div class='post-image'>Brand</div>
-            <div class='post-create'>Price</div>
-            <div class='post-update'>Provider ID</div>
+            <div class='tv-id'>TV ID</div>
+            <div class='tv-provider_id'>Provider ID</div>
+            <div class='tv-name'>Name</div>
+            <div class='tv-brand'>Brand</div>
+            <div class='tv-price'>Price</div>
+            <div class='tv-update'>Update Time</div>
             </div>`;  //end the row
 
     // content rows
     for (let x in tvs) {
         let tv = tvs[x];
         _html += `<div class='content-row'>
-            <div class='post-id'>${tv.tv_id}</div>
-            <div class='post-body' id='post-edit-body-${tv.tv_id}'>${tv.name}</div> 
-            <div class='post-image' id='post-edit-image_url-${tv_.tv_id}'>${tv.brand}</div>
-            <div class='post-create' id='post-edit-created_at-${tv.tv_id}'>${tv.price}</div> 
-            <div class='post-update' id='post-edit-updated_at-${tv.tv_id}'>${tv.provider_id}</div>`;
+            <div class='tv-tv_id'>${tv.tv_id}</div>
+           <div class='tv-name' id='tv-edit-provider_id-${tv.tv_id}'>${tv.provider_id}</div> 
+            <div class='tv-name' id='tv-edit-name-${tv.tv_id}'>${tv.name}</div> 
+            <div class='tv-brand' id='tv-edit-brand-${tv_.tv_id}'>${tv.brand}</div>
+            <div class='tv-price' id='tv-edit-price-${tv.tv_id}'>${tv.price}</div>`;
+           
 
-            _html += `<div class='list-edit'><button id='btn-post-edit-${tv.tv_id}' onclick=editTV('${tv.tv_id}') class='btn-light'> Edit </button></div>
-            <div class='list-update'><button id='btn-post-update-${tv.tv_id}' onclick=updateTV('${tv.tv_id}') class='btn-light btn-update' style='display:none'> Update </button></div>
-            <div class='list-delete'><button id='btn-post-delete-${tv.tv_id}' onclick=deleteTV('${post.id}') class='btn-light'>Delete</button></div>
-            <div class='list-cancel'><button id='btn-post-cancel-${tv.tv_id}' onclick=cancelUpdateTV('${post.id}') class='btn-light btn-cancel' style='display:none'>Cancel</button></div>`
+            _html += `<div class='list-edit'><button id='btn-tv-edit-${tv.tv_id}' onclick=editTV('${tv.tv_id}') class='btn-light'> Edit </button></div>
+            <div class='list-update'><button id='btn-tv-update-${tv.tv_id}' onclick=updateTV('${tv.tv_id}') class='btn-light btn-update' style='display:none'> Update </button></div>
+            <div class='list-delete'><button id='btn-tv-delete-${tv.tv_id}' onclick=deleteTV('${post.id}') class='btn-light'>Delete</button></div>
+            <div class='list-cancel'><button id='btn-tv-cancel-${tv.tv_id}' onclick=cancelUpdateTV('${post.id}') class='btn-light btn-cancel' style='display:none'>Cancel</button></div>`
 
         _html += '</div>';  //end the row
     }
 
     //the row of element for adding a new message
 
-        _html += `<div class='content-row' id='post-add-row' style='display: none'> 
-            <div class='post-id post-editable' id='post-new-user_id' contenteditable='true' content="User ID"></div>
-            <div class='post-body post-editable' id='post-new-body' contenteditable='true'></div>
-            <div class='post-image post-editable' id='post-new-image_url' contenteditable='true'></div>
-            <div class='list-update'><button id='btn-add-post-insert' onclick='addPost()' class='btn-light btn-update'> Insert </button></div>
-            <div class='list-cancel'><button id='btn-add-post-cancel' onclick='cancelAddPost()' class='btn-light btn-cancel'>Cancel</button></div>
+        _html += `<div class='content-row' id='tv-add-row' style='display: none'> 
+            <div class='tv-tv_id tv-editable' id='tv-new-provider_id' contenteditable='true' content="User ID"></div>
+            <div class='tv-name tv-editable' id='tv-new-name' contenteditable='true'></div>
+            <div class='tv-brand tv-editable' id='tv-new-brand' contenteditable='true'></div>
+            <div class='tv-price tv-editable' id='tv-new-price' contenteditable='true'></div>
+            <div class='list-update'><button id='btn-add-tv-insert' onclick='addTV()' class='btn-light btn-update'> Insert </button></div>
+            <div class='list-cancel'><button id='btn-add-tv-cancel' onclick='cancelAddTV()' class='btn-light btn-cancel'>Cancel</button></div>
             </div>`;  //end the row
 
         // add new message button
-        _html += `<div class='content-row post-add-button-row'><div class='post-add-button' onclick='showAddRow()'>+ ADD A NEW MESSAGE</div></div>`;
+        _html += `<div class='content-row tv-add-button-row'><div class='tv-add-button' onclick='showAddRow()'>+ ADD A NEW TV</div></div>`;
 
     //Finally, update the page
     subheading = (subheading == null) ? 'All TVs' : subheading;
@@ -96,8 +99,8 @@ function searchTVs() {
     })
         .then(checkFetch)
         .then(response => response.json())
-        .then(posts => displayAllTVs(tvs))
-        .catch(err => showTV("Errors", err)) //display errors
+        .then(tvs => displayAllTVs(tvs))
+        .catch(err => showMessage("Errors", err)) //display errors
 
 
 }
@@ -117,14 +120,13 @@ function editTV(tv_id) {
     //     $(this).attr('contenteditable', true).addClass('post-editable');
     // });
 
-    $("div#post-edit-body-" + tv_id).attr('contenteditable', true).addClass('post-editable');
-    $("div#post-edit-image_url-" + tv_id).attr('contenteditable', true).addClass('post-editable');
-    $("div#post-edit-created_at-" + tv_id).attr('contenteditable', true).addClass('post-editable');
-    $("div#post-edit-updated_at-" + tv_id).attr('contenteditable', true).addClass('post-editable');
+    $("div#tv-edit-name-" + tv_id).attr('contenteditable', true).addClass('tv-editable');
+    $("div#tv-edit-brand-" + tv_id).attr('contenteditable', true).addClass('tv-editable');
+    $("div#tv-edit-price-" + tv_id).attr('contenteditable', true).addClass('tv-editable');
 
-    $("button#btn-post-edit-" + tv_id + ", button#btn-post-delete-" + tv_id).hide();
-    $("button#btn-post-update-" + tv_id + ", button#btn-post-cancel-" + tv_id).show();
-    $("div#post-add-row").hide();
+    $("button#btn-post-edit-" + tv_id + ", button#btn-tv-delete-" + tv_id).hide();
+    $("button#btn-post-update-" + tv_id + ", button#btn-tv-cancel-" + tv_id).show();
+    $("div#tv-add-row").hide();
 }
 
 //This function gets called when the user clicks on the Update button to update a message record
@@ -132,10 +134,10 @@ function updateTV(tv_id) {
 	console.log('update the TV whose id is ' + tv_id);
 
     let data = {};
-    data['provider_id'] = $("div#post-edit-body-" + tv_id).html();
-    data['name'] = $("div#post-edit-image_url-" + tv_id).html();
-    data['brand'] = $("div#post-edit-created_at-" + tv_id).html();
-    data['price'] = $("div#post-edit-updated_at-" + tv_id).html();
+    data['provider_id'] = $("div#tv-edit-provider_id-" + tv_id).html();
+    data['name'] = $("div#tv-edit-name-" + tv_id).html();
+    data['brand'] = $("div#tv-edit-brand-" + tv_id).html();
+    data['price'] = $("div#tv-edit-price" + tv_id).html();
     console.log(data);
     const url = baseUrl_API + "/tvs/" + tv_id;
     console.log(url);
@@ -197,7 +199,7 @@ function removeTV(tv_id) {
 // It gets called when a user clicks on the Add New Student link
 function showAddRow() {
     resetTV(); //Reset all items
-    $('div#post-add-row').show();
+    $('div#tv-add-row').show();
 }
 
 //This function inserts a new message. It gets called when a user clicks on the Insert button.
@@ -205,7 +207,7 @@ function addTV() {
 	console.log('Add a new TV');
 
     let data = {};
-    $("div[tv_id^='post-new-']").each(function () {
+    $("div[tv_id^='tv-new-']").each(function () {
         let field = $(this).attr('tv_id').substr(9);
         let value = $(this).html();
         data[field] = value;
@@ -231,7 +233,7 @@ function addTV() {
 
 // This function cancels adding a new TV. It gets called when a user clicks on the Cancel button.
 function cancelAddTV() {
-    $('#post-add-row').hide();
+    $('#tv-add-row').hide();
 }
 
 /***********************************************************************************************************
@@ -258,8 +260,8 @@ let checkFetch = async function (response) {
 //Reset TV section: remove editable features, hide update and cancel buttons, and display edit and delete buttons
 function resetTV() {
     // Remove the editable feature from all divs
-    $("div[tv_id^='post-edit-']").each(function () {
-        $(this).removeAttr('contenteditable').removeClass('post-editable');
+    $("div[tv_id^='tv-edit-']").each(function () {
+        $(this).removeAttr('contenteditable').removeClass('tv-editable');
     });
 
     // Hide all the update and cancel buttons and display all the edit and delete buttons

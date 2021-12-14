@@ -7,9 +7,9 @@
 
 namespace Slim\Exception;
 
-use Psr\Container\ContainerExceptionInterface;
+use Interop\Container\Exception\ContainerException as InteropContainerException;
 use InvalidArgumentException;
 
-class ContainerException extends InvalidArgumentException implements ContainerExceptionInterface
+class ContainerException extends InvalidArgumentException implements InteropContainerException
 {
 }

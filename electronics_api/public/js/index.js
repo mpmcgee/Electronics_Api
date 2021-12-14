@@ -24,11 +24,8 @@ $(function () {
             case 'user':
                 showUsers();
                 break;
-            case 'post':
-                showPosts();
-                break;
             case 'admin':
-                showAllPosts();
+                showAllTVs();
                 break;
             case 'signin':
                 signin();
@@ -39,7 +36,14 @@ $(function () {
             case 'signout':
                 signout();
                 break;
-            case 'message':
+            case 'provider':
+                showProviders();
+                break;
+            case 'tv' :
+                showTVs();
+                break;
+            case 'phone' :
+                showPhones();
                 break;
             default:
                 home();

@@ -14,7 +14,7 @@ interface EnvironmentInterface
      *
      * @param  array $settings Array of custom environment keys and values
      *
-     * @return static
+     * @return EnvironmentInterface
      */
     public static function mock(array $settings = []);
 }

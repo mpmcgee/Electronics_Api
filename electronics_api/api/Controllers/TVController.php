@@ -15,7 +15,7 @@ class TVController {
 
     //list all TVs in database
     public function index(Request $request, Response $response, array $args){
-        $results = TV::getTVs();
+        $results = TV::getTVs($request);
         $code = array_key_exists('status', $results) ? 500 : 200;
         return $response->withJson($results, $code, JSON_PRETTY_PRINT);
     }

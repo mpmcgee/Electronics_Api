@@ -27,7 +27,7 @@ $('form.form-signin').submit(function (e) {
         $('.img-loading').hide();
         jwt = data.jwt;
 
-        //successfully signed in; enable all links in nav bar, hide signin and show signout links
+        //successfully signed in; enable all links in nasv bar, hide signin and show signout links
         $('a.nav-link.disabled').removeClass('disabled'); //enable all links
         $("li#li-signin, form.form-signin").hide(); //hide the signin link and form
         $("li#li-signout").show(); //show the signout link

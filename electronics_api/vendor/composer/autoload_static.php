@@ -34,6 +34,7 @@ class ComposerStaticInit731b5c6fe62897d2fad44e9ea4cdc4dc
         ),
         'I' => 
         array (
+            'Interop\\Container\\' => 18,
             'Illuminate\\Support\\' => 19,
             'Illuminate\\Database\\' => 20,
             'Illuminate\\Contracts\\' => 21,
@@ -95,6 +96,10 @@ class ComposerStaticInit731b5c6fe62897d2fad44e9ea4cdc4dc
         'Psr\\Container\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/container/src',
+        ),
+        'Interop\\Container\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/container-interop/container-interop/src/Interop/Container',
         ),
         'Illuminate\\Support\\' => 
         array (

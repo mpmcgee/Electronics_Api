@@ -23,9 +23,12 @@
     <link rel="stylesheet" href="css/user.css">
     <link rel="stylesheet" href="css/post_preview.css">
     <link rel="stylesheet" href="css/post.css">
+    <link rel="stylesheet" href="css/provider.css">
+    <link rel="stylesheet" href="css/tv.css">
+    <link rel="stylesheet" href="css/phone.css">
     <link rel="stylesheet" href="css/admin.css">
     <link rel="stylesheet" href="css/signin.css">
-    <title>MeElectronics Single Page Application</title>
+    <title>MyElectronics Single Page Application</title>
 
 </head>
 <body class="d-flex flex-column h-100">
@@ -45,8 +48,15 @@
                         <a class="nav-link disabled" href="#user">Users <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item" id="li-course">
-                        <a class="nav-link disabled" href="#post">Messages</a>
+                        <a class="nav-link disabled" href="#provider">Providers</a>
                     </li>
+                    <li class="nav-item" id="li-tv">
+                        <a class="nav-link disabled" href="#tv">TVs</a>
+                    </li>
+                    <li class="nav-item" id="li-course">
+                        <a class="nav-link disabled" href="#phone">Phones</a>
+                    </li>
+
                     <li class="nav-item" id="li-student">
                         <a class="nav-link disabled" href="#admin">Admin</a>
                     </li>

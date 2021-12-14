@@ -22,9 +22,9 @@ function showUsers() {
 function displayUsers(users) {
     let _html;
     _html = `<div class='content-row content-row-header'>
-        <div class='user-name'>Name</div>
+        <div class='user-first_name'>First Name</div>
+        <div class='user-last_name'>Last Name</div>
         <div class='user-email'>Email</div>
-        <div class='user-profileicon-phone'>Profile Icon</div>
         <div class='user-username'>Username</div>
         </div>`;
     for (let x in users) {
@@ -32,13 +32,10 @@ function displayUsers(users) {
         let cssClass = (x % 2 == 0) ? 'content-row' : 'content-row content-row-odd';
         _html += `<div id='content-row-${user.id}' class='${cssClass}'>
             <div class='user-name'>
-                <span class='list-key' data-user='${user.id}' 
-                     onclick=showUserPostsPreview('${user.id}') 
-                     title='Get messages made by the user'>${user.name}
-                </span>
             </div>
+            <div class='user-first_name'>${user.first_name}</div>
+            <div class='user-last_name'>${user.last_name}</div>
             <div class='user-email'>${user.email}</div>
-            <div class='user-profileicon'>${user.profile_icon}</div>
             <div class='user-username'>${user.username}</div>            
             </div>`;
     }

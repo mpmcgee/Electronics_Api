@@ -30,7 +30,9 @@
 
 
 <script src="js/user.js"></script>
-<script src="js/post.js"></script>
+<script src="js/tv.js"></script>
+<script src="js/provider.js"></script>
+<script src="js/phone.js"></script>
 <script src="js/admin.js"></script>
 <script src="js/signin.js"></script>
 <script src="js/signup.js"></script>
