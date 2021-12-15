@@ -1,29 +1,32 @@
 // /***********************************************************************************************************
-//  ******                            Show TVs                                                    ******
+//  ******                            Show Phones                                                    ******
 //  **********************************************************************************************************/
 //This function shows all users. It gets called when a user clicks on the Users link in the nav bar.
 function showPhones() {
-    const url = baseUrl_API + '/phones';
-    $.ajax({
-        url: url,
-        headers: {"Authorization": "Bearer " + jwt}
-    }).done(function (data) {
-        displayPhones(data);
-    }).fail(function (jqXHR, textStatus) {
-        let error = {'code': jqXHR.staus,
-            'status':jqXHR.responseJson.status};
-        showMessage('Error', JSON.stringify(error, null, 4));
-    });
 
+    const url = baseUrl_API + "/phones?limit=50&offset=0&sort=phone_id:asc";
+    fetch(url, {
+        method: 'GET',
+        headers: {"Authorization": "Bearer " + jwt}
+    })
+        .then(checkFetch)
+        .then(response => response.json())
+        .then(phones => displayPhones(phones.data))
+        .catch(err => showMessage("Errors", err)) //display errors
 }
 
 
 
 
-//Callback function: display all providers; The parameter is an array of user objects.
-function displayPhones(phones) {
+
+//Callback function: display all phones; The parameter is an array of user objects.
+function displayPhones(phones, subheading=null) {
     let _html;
-    _html = `<div class='content-row content-row-header'>
+    _html =
+       `<div style='text-align: right; margin-bottom: 3px'>
+        <input id='search-term' placeholder='Enter search terms'>
+        <button id='btn-post-search' onclick='searchPhones()'>Search</button></div>           
+        <div class='content-row content-row-header'>
         <div class='phone-id'>Phone ID</div>
         <div class='phone-provider_id'>Provider ID</div>
         <div class='phone-model'>Model</div>
@@ -32,38 +35,47 @@ function displayPhones(phones) {
         </div>`;
     for (let x in phones) {
         let phone = phones[x];
-        let cssClass = (x % 2 == 0) ? 'content-row' : 'content-row content-row-odd';
-        _html += `<div id='content-row-${phone.phone_id}' class='${cssClass}'>
-            <div class='phone-id'>${phone.phone_id}</div>
-            <div class='phone-provider_id'>${phone.provider_id}</div>
-            <div class='phone-name'>${phone.name}</div>
-            <div class='phone-brand'>${phone.brand}</div>
-            <div class='phone-price'>${phone.price}</div>
-            </div>`;
-        // //add a div block for pagination links and selection lists for limiting and sorting courses
-        // _html += "<div class='content-row course-pagination'><div>";
-        //
-        // //pagination
-        // _html += paginateTVs(response);
-        //
-        // //limit courses
-        // _html += limitTvs(response);
-        //
-        // //sort courses
-        // _html += sortTvs(response);
-        //
-        // //close the div blocks
-        // _html += "</div></div>";
+        _html += `<div class='content-row'>
+            <div class='phone-id' id="phone-edit-id-${phone.phone_id}'">${phone.phone_id}</div>
+            <div class='phone-provider_id' id="phone-edit-provider_id-${phone.phone_id}">${phone.provider_id}</div>
+            <div class='phone-name' id="phone-edit-name-${phone.phone_id}">${phone.name}</div>
+            <div class='phone-brand' id="phone-edit-brand-${phone.phone_id}">${phone.brand}</div>
+            <div class='phone-price' id="phone-edit-price-${phone.phone_id}">${phone.price}</div>`
+
+
+        _html += `<div class='list-edit'><button id='btn-phone-edit-${phone.phone_id}' onclick=editPhone('${phone.phone_id}') class='btn-light'> Edit </button></div>
+            <div class='list-update'><button id='btn-phone-update-${phone.phone_id}' onclick=updatePhone('${phone.phone_id}') class='btn-light btn-update' style='display:none'> Update </button></div>
+            <div class='list-delete'><button id='btn-phone-delete-${phone.phone_id}' onclick=deletePhone('${phone.phone_id}') class='btn-light'>Delete</button></div>
+            <div class='list-cancel'><button id='btn-phone-cancel-${phone.phone_id}' onclick=cancelUpdatePhone('${phone.phone_id}') class='btn-light btn-cancel' style='display:none'>Cancel</button></div>`
+
+        _html += '</div>';  //end the row
     }
+
+    _html += `<div class='content-row' id='phone-add-row' style='display: none'> 
+                <div class='phone-id phone-editable' id='phone_id' contenteditable='false' content="null"></div>
+                <div class='phone-provider_id phone-editable' id='phone-new-provider_id' contenteditable='true'></div>
+                <div class='phone-name phone-editable' id='phone-new-name' contenteditable='true'></div>
+                <div class='phone-brand phone-editable' id='phone-new-brand' contenteditable='true'></div>
+                <div class='phone-price phone-editable' id='phone-new-price' contenteditable='true'></div>
+                <div class='list-update'><button id='btn-add-phone-insert' onclick='addPhone()' class='btn-light btn-update'> Insert </button></div>
+                <div class='list-cancel'><button id='btn-add-phone-cancel' onclick='cancelAddPhone()' class='btn-light btn-cancel'>Cancel</button></div>
+            </div>`;  //end the row
+
+
+
+    // add new message button
+    _html += `<div class='content-row phone-add-button-row'><div class='phone-add-button' onclick='showAddRow()'>+ ADD A NEW PHONE</div></div>`;
+
     //Finally, update the page
-    updateMain('Providers', 'All Providers', _html);
+    subheading = (subheading == null) ? 'All Phones' : subheading;
+    updateMain('Phones', 'All Phones', _html);
 }
 
 /*****************************************************
  ******** Pagination, sorting, and limiting TVs****
  *****************************************************/
 //paginate courses
-function paginateProviders(response) {
+function paginatePhones(response) {
     //calculate total num of courses
     let limit = response.limit;
     let totalCount = response.totalCount;
@@ -96,21 +108,21 @@ function paginateProviders(response) {
 
     //generate html code for links
     let _html = `Showing Page ${currentPage} of ${totalPages}&nbsp;&nbsp;&nbsp;&nbsp;
-                <a href='#provider' title="first page" onclick'showTVs(${pages.first})'> << </a>
-                <a href='#provider' title="previous page" onclick'showTVs(${pages.prev})'> < </a>
-                <a href='#provider' title="next page" onclick'showTVs(${pages.next})'> > </a>
-                <a href='#provider' title="last page" onclick'showTVs(${pages.last})'> >> </a>`
+                <a href='#phone' title="first page" onclick'showPhones(${pages.first})'> << </a>
+                <a href='#phone' title="previous page" onclick'showPhones(${pages.prev})'> < </a>
+                <a href='#phone' title="next page" onclick'showPhones(${pages.next})'> > </a>
+                <a href='#phone' title="last page" onclick'showPhones(${pages.last})'> >> </a>`
 
     return _html;
 }
 
 //limit courses
-function limitProviders(response) {
+function limitPhones(response) {
     //define an array of courses per page options
     let coursesPerPageOptions = [5, 10, 20];
 
     //create a selection list for limiting courses
-    let _html = `&nbsp;&nbsp;&nbsp;&nbsp; Items per page:<select id='course-limit-select' onChange='showTVs()'>`;
+    let _html = `&nbsp;&nbsp;&nbsp;&nbsp; Items per page:<select id='course-limit-select' onChange='showPhones()'>`;
     coursesPerPageOptions.forEach(function(option) {
         let selected = (response.limit == option) ? "selected" : "";
         _html += `<option ${selected} value="${option}">${option}</option>`;
@@ -122,7 +134,7 @@ function limitProviders(response) {
 }
 
 //sort courses
-function sortTVs(response) {
+function sortPhones(response) {
     //create the selection list for sorting
     let sort = response.sort;
 
@@ -148,36 +160,52 @@ function sortTVs(response) {
 
 
 //This function gets called when the user clicks on the Cancel button to cancel updating a student
-function cancelUpdateTv(id) {
-    showTvs();
+function cancelUpdatePhone(id) {
+    showPhones();
 }
 /***********************************************************************************************************
  ******                            Delete TV                                                     ******
  **********************************************************************************************************/
 
 // This function confirms deletion of a student. It gets called when a user clicks on the Delete button.
-function deleteTV(id) {
+function deletePhone(id) {
     $('#modal-button-ok').html("Delete").show().off('click').click(function () {
-        removeTV(provider_id);
+        removePhone(id);
     });
     $('#modal-button-close').html('Cancel').show().off('click');
-    $('#modal-content').html('Are you sure you want to delete the student?');
+    $('#modal-content').html('Are you sure you want to delete the phone?');
 
     // Display the modal
     $('#modal-center').modal();
 }
 
 // Callback function that removes a student from the system. It gets called by the deleteStudent function.
-function removeTV(id) {
-    //console.log('remove the student whose id is ' + id);
-    let url = baseUrl_API + '/provider' + id;
+function removePhone(id) {
+    let url = baseUrl_API + "/phones/" + id;
     fetch(url, {
-        method: 'DELETE',
-        headers: {"Authorization": "Bearer" + jwt}
+        method: 'DElETE',
+        headers: {"Authorization": "Bearer " + jwt,},
     })
         .then(checkFetch)
-        .then(() => showTVs())
-        .catch(err => showMessage("Errors", err))
+        .then(() => showPhones())
+        .catch(error => showMessage("Errors", error))
+}
+
+/***********************************************************************************************************
+ ******                            Check Fetch for Errors                                             ******
+ **********************************************************************************************************/
+/* This function checks fetch request for error. When an error is detected, throws an Error to be caught
+ * and handled by the catch block. If there is no error detetced, returns the promise.
+ * Need to use async and await to retrieve JSON object when an error has occurred.
+ */
+let checkFetch = async function (response) {
+    if (!response.ok) {
+        await response.json()  //need to use await so Javascipt will until promise settles and returns its result
+            .then(result => {
+                throw Error(JSON.stringify(result, null, 4));
+            });
+    }
+    return response;
 }
 
 
@@ -187,96 +215,105 @@ function removeTV(id) {
 //This function shows the row containing editable fields to accept user inputs.
 // It gets called when a user clicks on the Add New Student link
 function showAddRow() {
-    resetPlayer(); //Reset all items
-    $('div#student-add-row').show();
+    resetPhone(); //Reset all items
+    $('div#phone-add-row').show();
 }
 
 //This function inserts a new student. It gets called when a user clicks on the Insert button.
-function addTV() {
+function addPhone() {
     //console.log('Add a new student');
     let data = {};
 
     //retrieve new student details and create a JSON object
-    $("div[id^='student-new-']").each(function(){
-        let field = $(this).attr('id').substr(2); //last part of an id is the field name, there are 12 characters b4 the field name
+    $("div[id^='phone-new-']").each(function(){
+        let field = $(this).attr('id').substr(10); //last part of an id is the field name, there are 12 characters b4 the field name
         let value = $(this).html(); //content of the div
+        value = value.replace("<br>", "");
         data[field] = value;
     })
 
+
     //send the request via fetch
-    const url = baseUrl_API + '/providers';
+    const url = baseUrl_API + '/phones';
+    console.log(url);
 
     fetch(url, {
         method: 'POST',
         headers: {
             "Authorization": "Bearer" + jwt,
-            "Accept": 'application/json',
             "Content-Type": 'application/json'
         },
         body: JSON.stringify(data),
     })
         .then(checkFetch)
-        .then(() => showPlayers())
-        .catch(err => showMessage("Errors", err))
+        .then(() => showPhones())
+        .catch(err => showPhones("Errors", err))
 }
 
 
 
 // This function cancels adding a new student. It gets called when a user clicks on the Cancel button.
-function cancelAddTV() {
-    $('#student-add-row').hide();
+function cancelAddPhone() {
+    $('#phone-add-row').hide();
 }
 
 // This function gets called when a user clicks on the Edit button to make items editable
-function editTV(id) {
+function editPhone(id) {
     //Reset all items
-    resetPlayer();
+    resetPhone();
 
-    //select all divs whose ids begin with 'student' and end with the current id and make them editable
-    $("div[id^='student-edit'][id$='" + id + "']").each(function () {
-        $(this).attr('contenteditable', true).addClass('student-editable');
-    });
+    //select all divs whose ids begin with 'post' and end with the current id and make them editable
+    // $("div[id^='phone-edit'][id$='" + id + "']").each(function () {
+    //     $(this).attr('contenteditable', true).addClass('phone-editable');
+    // });
 
-    $("button#btn-student-edit-" + id + ", button#btn-student-delete-" + id).hide();
-    $("button#btn-student-update-" + id + ", button#btn-student-cancel-" + id).show();
-    $("div#student-add-row").hide();
+    $("div#phone-edit-id-" + id).attr('contenteditable', true).addClass('phone-editable');
+    $("div#phone-edit-provider_id-" + id).attr('contenteditable', true).addClass('phone-editable');
+    $("div#phone-edit-name-" + id).attr('contenteditable', true).addClass('phone-editable');
+    $("div#phone-edit-brand-" + id).attr('contenteditable', true).addClass('phone-editable');
+    $("div#phone-edit-price-" + id).attr('contenteditable', true).addClass('phone-editable');
+
+
+
+    $("button#btn-phone-edit-" + id + ", button#btn-phone-delete-" + id).hide();
+    $("button#btn-phone-update-" + id + ", button#btn-phone-cancel-" + id).show();
+    $("div#phone-add-row").hide();
 }
 
 //This function gets called when the user clicks on the Update button to update a student record
-function updateProvider(id) {
-    //console.log('update the student whose id is ' + id);
+function updatePhone(id) {
     let data = {};
-
-    //select all divs whose ids begin with 'student-edit' and end with the currect id
-    //then extract student details from the divs and create a JSON object
-    $("div[id^='student-edit-'][id$='" + id + "']").each(function(){
-        let field = $(this).attr('id').split('-')[2]; //the second part of an id is the field name
-        let value = $(this).html(); //content of the div block
-        data[field] = value;
-    })
-
-    //make fetch request to update the student
-    const url = baseUrl_API + '/providers' + id;
+    data['provider_id'] = $("div#phone-edit-provider_id-" + id).html();
+    data['name'] = $("div#phone-edit-name-" + id).html();
+    data['brand'] = $("div#phone-edit-brand-" + id).html();
+    data['price'] = $("div#phone-edit-price-" + id).html();
+    console.log(data);
+    const url = baseUrl_API + "/phones/" + id;
+    console.log(url);
     fetch(url, {
-        method: 'PUT',
+        method: 'PATCH',
         headers: {
-            "Authorization": "Bearer" + jwt,
+            "Authorization": "Bearer " + jwt,
             "Content-Type": "application/json"
         },
         body: JSON.stringify(data)
     })
         .then(checkFetch)
-        .then(() => resetTV()) //reset students
-        .catch(err => showMessage("Errors", err))
+        .then(() => resetPhone())
+        .catch(error => showMessage("Errors", error))
+
+    $("button#btn-phone-update-" + id + ", button#btn-phone-cancel-" + id).hide();
+    $("button#btn-phone-edit-" + id + ", button#btn-phone-delete-" + id).show();
+
 }
 
 
 
 //Reset student section: remove editable features, hide update and cancel buttons, and display edit and delete buttons
-function resetTV() {
+function resetPhone() {
     // Remove the editable feature from all divs
-    $("div[id^='student-edit-']").each(function () {
-        $(this).removeAttr('contenteditable').removeClass('student-editable');
+    $("div[id^='phone-edit-']").each(function () {
+        $(this).removeAttr('contenteditable').removeClass('phone-editable');
     });
 
     // Hide all the update and cancel buttons and display all the edit and delete buttons
@@ -288,4 +325,28 @@ function resetTV() {
             $(this).show();
         }
     });
+}
+
+function searchPhones() {
+    let term = $("#search-term").val();
+    //console.log(term);
+    const url = baseUrl_API + "/phones?q=" + term + "&offset=0&sort=phone_id:asc";
+    let subheading = '';
+    //console.log(url);
+    if (term == '') {
+        subheading = "All Phones";
+    } else if (isNaN(term)) {
+        subheading = "Phones Containing '" + term + "'"
+    } else {
+        subheading = "Phones whose ID includes" + term;
+    }
+    //send the request
+    fetch(url, {
+        method: 'GET',
+        headers: {"Authorization": "Bearer " + jwt}
+    })
+        .then(checkFetch)
+        .then(response => response.json())
+        .then(phones => displayPhones(phones))
+        .catch(err => showMessage("Errors", err)) //display errors
 }

@@ -16,7 +16,7 @@ class PhoneController {
 
     //list all phones in database
     public function index(Request $request, Response $response, array $args){
-        $results = Phone::getPhones();
+        $results = Phone::getPhones($request);
         $code = array_key_exists('status', $results) ? 500 : 200;
         return $response->withJson($results, $code, JSON_PRETTY_PRINT);
     }

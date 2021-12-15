@@ -25,7 +25,7 @@ $(function () {
                 showUsers();
                 break;
             case 'admin':
-                showAllTVs();
+                showAllPhones();
                 break;
             case 'signin':
                 signin();

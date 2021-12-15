@@ -1,3 +1,154 @@
+/*
+*  styles for student-related elements
+ */
+
+.student-id {
+    width: 100px;
+}
+
+.student-name {
+    width: 200px;
+}
+
+.student-email {
+    width: 150px;
+}
+
+.student-major {
+    width: 250px;
+}
+
+.student-gpa {
+    width: 100px;
+}
+
+.student-id, .student-name, .student-email, .student-major, .student-gpa {
+    margin: 0px 1px;
+    padding: 1px;
+    border: 1px solid #FFFFFF;
+}
+
+/* styles for edit and delete buttons */
+
+div[class^="list-"] {
+    padding: none;
+}
+
+button.btn-light {
+    margin: 0px 2px;
+    width: 75px;
+    border: #4D90C6 solid 1px;
+}
+
+/* styles for the update button */
+button.btn-update {
+    background-color: #d58512;
+}
+/* styles for the cancel button */
+button.btn-cancel{
+    color: #ffffff;
+    background-color: #5e5e5e;
+}
+
+/* styles for editable items */
+.provider-editable {
+    border: 1px solid #cccccc;
+    min-height: 22px
+}
+.tv-editable {
+    border: 1px solid #cccccc;
+    min-height: 22px
+}
+.phone-editable {
+    border: 1px solid #cccccc;
+    min-height: 22px
+}
+/* styles for the add form  */
+.provider-add-button-row {
+    background-color: #123E81;
+    color: #FFFFFF;
+}
+
+.provider-add-button {
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+.provider-add-button:hover {
+    text-decoration: underline;
+}
+/* styles for the add form  */
+.tv-add-button-row {
+    background-color: #123E81;
+    color: #FFFFFF;
+}
+
+.tv-add-button {
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+.tv-add-button:hover {
+    text-decoration: underline;
+}
+/* styles for the add form  */
+.phone-add-button-row {
+    background-color: #123E81;
+    color: #FFFFFF;
+}
+
+.phone-add-button {
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+.phone-add-button:hover {
+    text-decoration: underline;
+}
+
+.phone-detail-label {
+    padding: 3px 10px;
+    min-width: 120px;
+    text-align: right;
+    font-weight: bold;
+    border-right: #b7d2ff solid 1px;
+    align-items: normal;
+}
+
+.phone-detail-field {
+    padding: 3px 10px;
+    align-items: normal;
+}
+
+
+
+.phone-pagination {
+    border-top: 1px solid #e4f1fe;
+    border-left: none;
+    border-right: none;
+    padding-top: 10px;
+}
+
+.phone-pagination div {
+    width: 100%;
+    text-align: right;
+    font-size: 0.8em;
+}
+
+.phone-pagination  a {
+    border-radius: 3px;
+    border: 1px solid #e4f1fe;
+    width: 20px;
+    height: 18px;
+    display: inline-block;
+    text-align: center;
+    margin-right: 5px;
+}
+
+.phone-pagination select {
+    margin-left: 10px;
+}
+
 .phone-phone_id{
     width: 130px
 }

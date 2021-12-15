@@ -13,17 +13,13 @@ class TV extends Model {
     // The table associated with this model
     protected $table = 'tvs';
     protected $primaryKey = 'tv_id';
+    public $timestamps = false;
 
     //Inverse of the one-to-many relationship
     public function user(){
         return $this->belongsTo(User::class, 'user_id');
     }
 
-//    public static function getTVs(){
-//        //all() method only retrieves the comments.
-//        $tvs = self::all();
-//        return $tvs;
-//    }
 
     public static function getTVs($request)
     {

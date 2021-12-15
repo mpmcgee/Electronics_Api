@@ -13,6 +13,7 @@ class Provider extends Model {
     // The table associated with this model
     protected $table = 'providers';
     protected $primaryKey = 'provider_id';
+    public $timestamps = false;
 
 
     public static function getProviders()
