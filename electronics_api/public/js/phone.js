@@ -12,7 +12,7 @@ function showPhones() {
         .then(checkFetch)
         .then(response => response.json())
         .then(phones => displayPhones(phones.data))
-        .catch(err => showMessage("Errors", err)) //display errors
+        .catch(err => showPhones("Errors", err)) //display errors
 }
 
 
