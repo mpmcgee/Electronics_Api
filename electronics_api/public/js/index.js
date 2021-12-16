@@ -64,7 +64,7 @@ function home() {
         desktop application.</p>
         
         <p>The entire application consists of two pages: the sign in /sign up page and the main page for displaying section data.
-        This application is an API client. Data of the application is provided by a API service called <strong>MyChatter API</strong>. 
+        This application is an API client. Data of the application is provided by a API service called <strong>MyElectronics API</strong>. 
         The application uses four common HTTP methods for CRUD operations: <strong>GET, POST, PUT, and DELETE</strong>.</p>
         
         <p>This application uses three different approaches for requesting API data:</p>

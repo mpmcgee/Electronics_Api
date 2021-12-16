@@ -37,7 +37,7 @@
     <!-- Fixed navbar -->
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
         <div class="container">
-            <a class="navbar-brand" href="#home" style="color:#F0E607; font-weight: bold"><img src="img/chatter-icon.png" style="width:40px;">&nbsp;MyChatter</a>
+            <a class="navbar-brand" href="#home" style="color:#F0E607; font-weight: bold"><img src="img/chatter-icon.png" style="width:40px;">&nbsp;MyElectronics</a>
             <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarCollapse"
                     aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>

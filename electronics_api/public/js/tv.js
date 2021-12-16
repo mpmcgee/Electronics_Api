@@ -141,7 +141,7 @@ function sortTVs(response) {
         "id_id:desc": "Last TV ID -> First TV ID",
     };
     //create selection list
-    let _html = `&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Sort by:<select id='course-sort-select' onChange='showTVs()'>`;
+    let _html = `&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Sort by:<select id='tv-sort-select' onChange='showTVs()'>`;
     for(let option in sortOptions) {
         let selected = (option == sortString) ? "selected" : "";
         _html += `<option ${selected} value="${option}">${sortOptions[option]}</option>`;

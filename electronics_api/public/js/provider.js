@@ -124,7 +124,7 @@ function limitProviders(response) {
 }
 
 //sort courses
-function sortTVs(response) {
+function sortProviders(response) {
     //create the selection list for sorting
     let sort = response.sort;
 
@@ -138,7 +138,7 @@ function sortTVs(response) {
         "title:desc": "Title Z - A"
     };
     //create selection list
-    let _html = `$nbsp;$nbsp;$nbsp;$nbsp;$nbsp; Sort by:<select id='course-sort-select' onChange='showPlayers()'>`;
+    let _html = `&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Sort by:<select id='course-sort-select' onChange='showProviders()'>`;
     for(let option in sortOptions) {
         let selected = (option == sortString) ? "selected" : "";
         _html += `<option ${selected} value="${option}">${sortOptions[option]}</option>`;
@@ -151,16 +151,16 @@ function sortTVs(response) {
 
 //This function gets called when the user clicks on the Cancel button to cancel updating a student
 function cancelUpdateTv(id) {
-    showTvs();
+    showProviders();
 }
 /***********************************************************************************************************
  ******                            Delete TV                                                     ******
  **********************************************************************************************************/
 
 // This function confirms deletion of a student. It gets called when a user clicks on the Delete button.
-function deleteTV(id) {
+function deleteProvider(id) {
     $('#modal-button-ok').html("Delete").show().off('click').click(function () {
-        removeTV(provider_id);
+        removeProvider(provider_id);
     });
     $('#modal-button-close').html('Cancel').show().off('click');
     $('#modal-content').html('Are you sure you want to delete the student?');
@@ -170,7 +170,7 @@ function deleteTV(id) {
 }
 
 // Callback function that removes a student from the system. It gets called by the deleteStudent function.
-function removeTV(id) {
+function removeProvider(id) {
     //console.log('remove the student whose id is ' + id);
     let url = baseUrl_API + '/provider' + id;
     fetch(url, {
@@ -194,7 +194,7 @@ function showAddRow() {
 }
 
 //This function inserts a new student. It gets called when a user clicks on the Insert button.
-function addTV() {
+function addProvider() {
     //console.log('Add a new student');
     let data = {};
 
@@ -225,12 +225,12 @@ function addTV() {
 
 
 // This function cancels adding a new student. It gets called when a user clicks on the Cancel button.
-function cancelAddTV() {
+function cancelAddProvider() {
     $('#student-add-row').hide();
 }
 
 // This function gets called when a user clicks on the Edit button to make items editable
-function editTV(id) {
+function editProvider(id) {
     //Reset all items
     resetPlayer();
 
@@ -275,7 +275,7 @@ function updateProvider(id) {
 
 
 //Reset student section: remove editable features, hide update and cancel buttons, and display edit and delete buttons
-function resetTV() {
+function resetProvider() {
     // Remove the editable feature from all divs
     $("div[id^='student-edit-']").each(function () {
         $(this).removeAttr('contenteditable').removeClass('student-editable');
